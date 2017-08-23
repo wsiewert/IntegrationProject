@@ -15,7 +15,7 @@ namespace IntegrationProject.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page blah.";
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }
