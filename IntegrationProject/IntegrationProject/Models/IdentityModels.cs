@@ -20,6 +20,9 @@ namespace IntegrationProject.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
+        public DbSet<VolunteerEvent> VolunteerEvent { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
