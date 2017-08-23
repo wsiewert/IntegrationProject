@@ -22,6 +22,8 @@ namespace IntegrationProject.Models
     {
 
         public DbSet<VolunteerEvent> VolunteerEvent { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<User_Event> User_Event { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
