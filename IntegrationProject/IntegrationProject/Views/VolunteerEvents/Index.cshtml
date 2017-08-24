@@ -1,48 +1,65 @@
 ﻿@model IEnumerable<IntegrationProject.Models.VolunteerEvent>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Event";
 }
+<style>
+    div.description {
+        margin: 20px 0px 20px 0px;
+        padding: 10px 0px 10px 0px;
+        border: 5px groove red;
+    }
+</style>
 
-<h2>Index</h2>
+
+
+<div align ="left">
+<h2>
+    @Html.DisplayNameFor(model=> model.EventName)
+</h2>
+</div>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EventName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HostID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Zip)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AllDay)
-        </th>
-        <th></th>
-    </tr>
+
+
+<div align ="center">
+    <div class=" description">
+    <h4>
+        @*@Html.DisplayNameFor(model => model.EventName)<br>*@
+
+        @Html.DisplayNameFor(model => model.Description)
+        
+    </h4>          
+   </div>
+</div>
+
+
+<style>
+    div.text-left{
+        border: 3px dashed red;
+        margin: 20px 0px 20px 0px;
+        padding:10px 0px 10px 10px;
+        
+    }
+</style>
+
+<div class="text-left">       
+        @Html.DisplayNameFor(model => model.Address) <br>
+       
+        @Html.DisplayNameFor(model => model.City)<br>
+        
+        @Html.DisplayNameFor(model => model.State)<br>
+        
+        @Html.DisplayNameFor(model => model.Zip) <br>
+        
+        @Html.DisplayNameFor(model => model.StartDate)<br>
+        
+        @Html.DisplayNameFor(model => model.EndDate)<br>
+                  
+ </div>
+
 
 @foreach (var item in Model) {
     <tr>
@@ -74,9 +91,6 @@
             @Html.DisplayFor(modelItem => item.EndDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AllDay)
-        </td>
-        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
@@ -84,4 +98,4 @@
     </tr>
 }
 
-</table>
+
