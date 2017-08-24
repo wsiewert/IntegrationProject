@@ -281,12 +281,13 @@
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\UserSignedInIndex.cshtml" />
     <Content Include="Views\VolunteerEvents\Create.cshtml" />
     <Content Include="Views\VolunteerEvents\Delete.cshtml" />
     <Content Include="Views\VolunteerEvents\Details.cshtml" />
     <Content Include="Views\VolunteerEvents\Edit.cshtml" />
     <Content Include="Views\VolunteerEvents\Index.cshtml" />
+    <Content Include="Views\Users\ReadOnlyIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -331,7 +332,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50102</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
