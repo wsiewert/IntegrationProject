@@ -14,7 +14,7 @@ namespace IntegrationProject.Models
         [Display (Name="Event Name")]
         public string EventName { get; set; }
 
-        public int HostID { get; set; }
+        public string HostID { get; set; }
 
         public string Description { get; set; }
 
@@ -30,8 +30,5 @@ namespace IntegrationProject.Models
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
-
-        public bool AllDay { get; set; }
-
     }
 }

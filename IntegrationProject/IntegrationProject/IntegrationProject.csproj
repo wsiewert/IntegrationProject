@@ -206,6 +206,10 @@
     <Compile Include="Migrations\201708232118348_AddUserAndUserEventTable.Designer.cs">
       <DependentUpon>201708232118348_AddUserAndUserEventTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708242029386_changed volunteerEvent.cs" />
+    <Compile Include="Migrations\201708242029386_changed volunteerEvent.Designer.cs">
+      <DependentUpon>201708242029386_changed volunteerEvent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -309,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708232118348_AddUserAndUserEventTable.resx">
       <DependentUpon>201708232118348_AddUserAndUserEventTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708242029386_changed volunteerEvent.resx">
+      <DependentUpon>201708242029386_changed volunteerEvent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
