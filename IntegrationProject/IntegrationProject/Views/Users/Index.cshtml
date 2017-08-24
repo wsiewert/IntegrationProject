@@ -1,0 +1,87 @@
+﻿@model IEnumerable<IntegrationProject.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VolunteerUpVotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VolunteerDownVotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventUpVotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventDownVotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoShowCount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VolunteerUpVotes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VolunteerDownVotes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventUpVotes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventDownVotes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoShowCount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
