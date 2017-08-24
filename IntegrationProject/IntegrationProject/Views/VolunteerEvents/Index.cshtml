@@ -50,26 +50,27 @@
 </style>
 
 <div class="text-left">
+    <div class="table">
+
+       <tr>@Html.DisplayNameFor(model => model.State)</tr> 
+
+       <tr>@Html.DisplayNameFor(model => model.Zip)</tr>
+
+        @Html.DisplayNameFor(model => model.StartDate)<br>
+
+        @Html.DisplayNameFor(model => model.EndDate)<br>
+
+        @Html.DisplayNameFor(model => model.Address)
+
+        @Html.DisplayNameFor(model => model.City)<br>
+
+    </div>
     
-
-    @Html.DisplayNameFor(model => model.State)<br>
-
-    @Html.DisplayNameFor(model => model.Zip) <br>
-
-    @Html.DisplayNameFor(model => model.StartDate)<br>
-
-    @Html.DisplayNameFor(model => model.EndDate)<br>
-
-    @Html.DisplayNameFor(model => model.Address)
-
-    @Html.DisplayNameFor(model => model.City)<br>
-    
-
 
     @foreach (var item in Model)
     {
        
-        @Html.DisplayFor(modelItem => item.EventName)<br>
+        @Html.DisplayFor(modelItem => item.EventName)
 
         @Html.DisplayFor(modelItem => item.HostID)
 
