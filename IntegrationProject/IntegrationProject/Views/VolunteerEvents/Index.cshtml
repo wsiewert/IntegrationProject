@@ -11,11 +11,12 @@
     }
 </style>
 
-
-
 <div align ="left">
 <h2>
-    @Html.DisplayNameFor(model=> model.EventName)
+    @foreach (var x in Model)
+    {
+    @Html.DisplayFor(eventName => x.EventName)
+    }
 </h2>
 </div>
 
@@ -23,18 +24,21 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-
 <div align ="center">
     <div class=" description">
     <h4>
         @*@Html.DisplayNameFor(model => model.EventName)<br>*@
 
         @Html.DisplayNameFor(model => model.Description)
-        
+        @foreach (var x in Model)
+        {
+            <p>
+                @Html.DisplayFor(modelItem => x.Description)
+            </p> 
+        }
     </h4>          
-   </div>
+    </div>
 </div>
-
 
 <style>
     div.text-left{
@@ -45,57 +49,51 @@
     }
 </style>
 
-<div class="text-left">       
-        @Html.DisplayNameFor(model => model.Address) <br>
+<div class="text-left">
+    
+
+    @Html.DisplayNameFor(model => model.State)<br>
+
+    @Html.DisplayNameFor(model => model.Zip) <br>
+
+    @Html.DisplayNameFor(model => model.StartDate)<br>
+
+    @Html.DisplayNameFor(model => model.EndDate)<br>
+
+    @Html.DisplayNameFor(model => model.Address)
+
+    @Html.DisplayNameFor(model => model.City)<br>
+    
+
+
+    @foreach (var item in Model)
+    {
        
-        @Html.DisplayNameFor(model => model.City)<br>
-        
-        @Html.DisplayNameFor(model => model.State)<br>
-        
-        @Html.DisplayNameFor(model => model.Zip) <br>
-        
-        @Html.DisplayNameFor(model => model.StartDate)<br>
-        
-        @Html.DisplayNameFor(model => model.EndDate)<br>
-                  
- </div>
+        @Html.DisplayFor(modelItem => item.EventName)<br>
+
+        @Html.DisplayFor(modelItem => item.HostID)
+
+        @Html.DisplayFor(modelItem => item.Description)
+
+        @Html.DisplayFor(modelItem => item.Address)
+
+        @Html.DisplayFor(modelItem => item.City)
+
+        @Html.DisplayFor(modelItem => item.State)
+
+        @Html.DisplayFor(modelItem => item.Zip)
+
+        @Html.DisplayFor(modelItem => item.StartDate)
+
+        @Html.DisplayFor(modelItem => item.EndDate)
 
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EventName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HostID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Zip)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+        @Html.ActionLink("Details", "Details", new { id = item.ID })
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+
+    }
+</div>
+
 
 
