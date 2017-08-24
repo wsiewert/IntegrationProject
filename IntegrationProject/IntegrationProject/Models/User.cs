@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -34,5 +35,7 @@ namespace IntegrationProject.Models
         public int EventDownVotes { get; set; }
         
         public int NoShowCount { get; set; }
+
+        
     }
 }

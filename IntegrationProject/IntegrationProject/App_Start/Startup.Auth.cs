@@ -58,11 +58,11 @@ namespace IntegrationProject
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "596689477589-ciqajnr8bm2h39m53vsnvepp349bt0ac.apps.googleusercontent.com",
+                ClientSecret = "AF4s-AuGaHdK-JG2AGwwvc1-"
+            });
         }
     }
 }
