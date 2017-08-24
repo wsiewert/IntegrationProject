@@ -6,13 +6,11 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+           @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LastName)
@@ -48,7 +46,7 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
+</td>
         <td>
             @Html.DisplayFor(modelItem => item.LastName)
         </td>
@@ -75,11 +73,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.NoShowCount)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>
 }

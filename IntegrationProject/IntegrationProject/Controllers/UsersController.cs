@@ -15,7 +15,14 @@ namespace IntegrationProject.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Users
-        public ActionResult Index()
+        public ActionResult ReadOnlyIndex(int? id)
+        {
+            var user = db.User.Where(x => x.ID == id);
+
+            return View(user);
+        }
+
+        public ActionResult UserSignedInIndex()
         {
             return View(db.User.ToList());
         }
@@ -52,7 +59,7 @@ namespace IntegrationProject.Controllers
             {
                 db.User.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("UserSignedInIndex");
             }
 
             return View(user);
@@ -84,7 +91,7 @@ namespace IntegrationProject.Controllers
             {
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("UserSignedInIndex");
             }
             return View(user);
         }
@@ -112,7 +119,7 @@ namespace IntegrationProject.Controllers
             User user = db.User.Find(id);
             db.User.Remove(user);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("UserSignedInIndex");
         }
 
         protected override void Dispose(bool disposing)
