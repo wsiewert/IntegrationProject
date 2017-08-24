@@ -49,6 +49,9 @@ namespace IntegrationProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,EventName,HostID,Description,Address,City,State,Zip,StartDate,EndDate,AllDay")] VolunteerEvent volunteerEvent)
         {
+            volunteerEvent.HostID = User.Identity.GetUserId();
+            //TODO: Add action to update user profile calendar
+
             if (ModelState.IsValid)
             {
                 db.VolunteerEvent.Add(volunteerEvent);
