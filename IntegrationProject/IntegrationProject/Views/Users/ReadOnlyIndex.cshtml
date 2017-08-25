@@ -2,12 +2,105 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutNoBar.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Volunteer Profile</h2>
 
+<div>
+    @*<h4>User</h4>*@
+    <hr />
+    @foreach (var item in Model)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <b>Name</b>
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <b>@Html.DisplayNameFor(model => model.Email)</b>
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <b>@Html.DisplayNameFor(model => model.Phone)</b>
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <b>@Html.DisplayNameFor(model => model.Description)</b>
+                </div>
+                <div class="col-md10">
+                    <blockquote class="blockquote">
+                        <p class="mb-0">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </p>
+                    </blockquote>                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <b>Volunteer Votes</b>
+                </div>
+                <div class="col-md-1">
+                    <img src="~/Images/thumbsup.png" alt="Thumbs Up" width="30" height="30" />
+                </div>
+                <div class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.VolunteerUpVotes)
+                </div>
+                <div class="col-md-1">
+                    <img src="~/Images/thumbsdown.png" alt="Thumbs Up" width="30" height="30" />
+                </div>
+                <div class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.VolunteerDownVotes)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <b>Event Host Votes</b>
+                </div>
+                <div class="col-md-1">
+                    <img src="~/Images/thumbsup.png" alt="Thumbs Up" width="30" height="30" />
+                </div>
+                <div class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.EventUpVotes)
+                </div>
+                <div class="col-md-1">
+                    <img src="~/Images/thumbsdown.png" alt="Thumbs Up" width="30" height="30" />
+                </div>
+                <div class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.EventDownVotes)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <b>@Html.DisplayNameFor(model => model.NoShowCount)</b>
+                </div>
+                <div class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.NoShowCount)
+                </div>
+            </div>
+        </div>
+       
+    }
+</div>
 
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
            @Html.DisplayNameFor(model => model.FirstName)
@@ -77,4 +170,4 @@
     </tr>
 }
 
-</table>
+</table>*@

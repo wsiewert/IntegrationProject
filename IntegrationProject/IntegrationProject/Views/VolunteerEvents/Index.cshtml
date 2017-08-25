@@ -3,98 +3,130 @@
 @{
     ViewBag.Title = "Event";
 }
-<style>
-    div.description {
-        margin: 20px 0px 20px 0px;
-        padding: 10px 0px 10px 0px;
-        border: 5px groove red;
-    }
-</style>
 
-<div align ="left">
-<h2>
-    @foreach (var x in Model)
-    {
-    @Html.DisplayFor(eventName => x.EventName)
-    }
-</h2>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-<div align ="center">
-    <div class=" description">
-    <h4>
-        @*@Html.DisplayNameFor(model => model.EventName)<br>*@
-
-        @Html.DisplayNameFor(model => model.Description)
-        @foreach (var x in Model)
-        {
-            <p>
-                @Html.DisplayFor(modelItem => x.Description)
-            </p> 
+    <style type="text/css">
+        .blueText {
+            color: #0000FF;
         }
-    </h4>          
+    </style>
+</head>
+<body>
+    <style>
+        div.description {
+            margin: 20px 0px 20px 0px;
+            padding: 10px 0px 10px 0px;
+            border: 5px groove red;
+        }
+    </style>
+    <div align="left">
+        <h2>
+            @foreach (var x in Model)
+            {
+                @Html.DisplayFor(eventName => x.EventName)
+            }
+        </h2>
     </div>
-</div>
 
-<style>
-    div.text-left{
-        border: 3px dashed red;
-        margin: 20px 0px 20px 0px;
-        padding:10px 0px 10px 10px;
-        
-    }
-</style>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 
-<div class="text-left">
-    <div class="table">
+    <div align="center">
+        <div class=" description">
+            <h4>
+                @*@Html.DisplayNameFor(model => model.EventName)<br>*@
 
-       <tr>@Html.DisplayNameFor(model => model.State)</tr> 
-
-       <tr>@Html.DisplayNameFor(model => model.Zip)</tr>
-
-        @Html.DisplayNameFor(model => model.StartDate)<br>
-
-        @Html.DisplayNameFor(model => model.EndDate)<br>
-
-        @Html.DisplayNameFor(model => model.Address)
-
-        @Html.DisplayNameFor(model => model.City)<br>
-
+                @Html.DisplayNameFor(model => model.Description)
+                @foreach (var x in Model)
+                {
+                    <p>
+                        @Html.DisplayFor(modelItem => x.Description)
+                    </p>
+                }
+            </h4>
+        </div>
     </div>
-    
 
-    @foreach (var item in Model)
-    {
-       
-        @Html.DisplayFor(modelItem => item.EventName)
+    <style>
+        div.text-left {
+            border: 3px dashed red;
+            margin: 20px 0px 20px 0px;
+            padding: 10px 0px 10px 10px;
+        }
+    </style>
 
-        @Html.DisplayFor(modelItem => item.HostID)
+    <div class="text-left">
+        <div class="table">
 
-        @Html.DisplayFor(modelItem => item.Description)
+            <tr>@Html.DisplayNameFor(model => model.State)</tr>
 
-        @Html.DisplayFor(modelItem => item.Address)
+            <tr>@Html.DisplayNameFor(model => model.Zip)</tr>
 
-        @Html.DisplayFor(modelItem => item.City)
+            @Html.DisplayNameFor(model => model.StartDate)<br>
 
-        @Html.DisplayFor(modelItem => item.State)
+            @Html.DisplayNameFor(model => model.EndDate)<br>
 
-        @Html.DisplayFor(modelItem => item.Zip)
+            @Html.DisplayNameFor(model => model.Address)
 
-        @Html.DisplayFor(modelItem => item.StartDate)
+            @Html.DisplayNameFor(model => model.City)<br>
 
-        @Html.DisplayFor(modelItem => item.EndDate)
+        </div>
 
 
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-        @Html.ActionLink("Details", "Details", new { id = item.ID })
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        @foreach (var item in Model)
+        {
+
+            @Html.DisplayFor(modelItem => item.EventName)
+
+            @Html.DisplayFor(modelItem => item.HostID)
+
+            @Html.DisplayFor(modelItem => item.Description)
+
+            @Html.DisplayFor(modelItem => item.Address)
+
+            @Html.DisplayFor(modelItem => item.City)
+
+            @Html.DisplayFor(modelItem => item.State)
+
+            @Html.DisplayFor(modelItem => item.Zip)
+
+            @Html.DisplayFor(modelItem => item.StartDate)
+
+            @Html.DisplayFor(modelItem => item.EndDate)
+
+
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+            @Html.ActionLink("Details", "Details", new { id = item.ID })
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+
+        }
+    </div>
+
+    <h4>Events in Google Map</h4>
+
+    <div id="googleMap" style="width:100%;height:400px;"></div>
+    <script>
+        function myMap() {
+            var mapProp = {
+                center: new google.maps.LatLng(51.508742, -0.120850),
+                zoom: 5,
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            //var marker = new google.maps.Marker({ position: 53218 });
+            //marker.setMap(map);
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=(YOURKEY)&callback=myMap"></script>
 
     }
-</div>
-
-
+</body>
+</html>
 
