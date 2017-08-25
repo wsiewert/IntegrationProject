@@ -210,13 +210,9 @@
     <Compile Include="Migrations\201708242029386_changed volunteerEvent.Designer.cs">
       <DependentUpon>201708242029386_changed volunteerEvent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708251352590_AddUserForeignKey.cs" />
-    <Compile Include="Migrations\201708251352590_AddUserForeignKey.Designer.cs">
-      <DependentUpon>201708251352590_AddUserForeignKey.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708251616537_ReaddEmailColumnToUser.cs" />
-    <Compile Include="Migrations\201708251616537_ReaddEmailColumnToUser.Designer.cs">
-      <DependentUpon>201708251616537_ReaddEmailColumnToUser.cs</DependentUpon>
+    <Compile Include="Migrations\201708252029328_new migration.cs" />
+    <Compile Include="Migrations\201708252029328_new migration.Designer.cs">
+      <DependentUpon>201708252029328_new migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -244,6 +240,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.datetimepicker.full.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -296,9 +293,6 @@
     <Content Include="Views\VolunteerEvents\Edit.cshtml" />
     <Content Include="Views\VolunteerEvents\Index.cshtml" />
     <Content Include="Views\Users\ReadOnlyIndex.cshtml" />
-    <Content Include="Views\Shared\_LayoutVolunteer.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutNoBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -328,11 +322,8 @@
     <EmbeddedResource Include="Migrations\201708242029386_changed volunteerEvent.resx">
       <DependentUpon>201708242029386_changed volunteerEvent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708251352590_AddUserForeignKey.resx">
-      <DependentUpon>201708251352590_AddUserForeignKey.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708251616537_ReaddEmailColumnToUser.resx">
-      <DependentUpon>201708251616537_ReaddEmailColumnToUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708252029328_new migration.resx">
+      <DependentUpon>201708252029328_new migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
