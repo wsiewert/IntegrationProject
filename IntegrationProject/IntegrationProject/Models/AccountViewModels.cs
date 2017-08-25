@@ -5,6 +5,12 @@ namespace IntegrationProject.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }

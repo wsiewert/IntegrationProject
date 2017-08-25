@@ -332,6 +332,13 @@ namespace IntegrationProject.Controllers
                 return RedirectToAction("Login");
             }
 
+            var externalIdentity = AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
+            var lastNameClaim = externalIdentity.Result.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Surname);
+            var givenNameClaim = externalIdentity.Result.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
+
+            var firstName = givenNameClaim.Value;
+            var lastname = lastNameClaim.Value;
+
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
@@ -347,7 +354,7 @@ namespace IntegrationProject.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { FirstName = firstName, LastName = lastname, Email = loginInfo.Email });
             }
         }
 
@@ -371,7 +378,27 @@ namespace IntegrationProject.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                var externalIdentity = AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
+                var lastNameClaim = externalIdentity.Result.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Surname);
+                var givenNameClaim = externalIdentity.Result.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
+
+                var firstName = givenNameClaim.Value;
+                var lastname = lastNameClaim.Value;
+
+                User newUser = new User
+                {
+                    FirstName = firstName,
+                    LastName = lastname
+                };
+
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    User = newUser
+                };
+                
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
