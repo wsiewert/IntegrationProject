@@ -61,7 +61,7 @@ namespace IntegrationProject
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "596689477589-ciqajnr8bm2h39m53vsnvepp349bt0ac.apps.googleusercontent.com",
-                ClientSecret = "nGt_bsuWc4BWz-VjNlaUG95R"
+                ClientSecret = "Wqv2_nJGVBy0Z31MwsfsqwYi"
             });
         }
     }
