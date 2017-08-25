@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IntegrationProject.Models;
+using Microsoft.AspNet.Identity;
 
 namespace IntegrationProject.Controllers
 {
@@ -15,6 +16,13 @@ namespace IntegrationProject.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Users
+        public ActionResult Index()
+        {
+            var user = db.User.ToList();
+
+            return View(user);
+        }
+
         public ActionResult ReadOnlyIndex(int? id)
         {
             var user = db.User.Where(x => x.ID == id);
@@ -24,7 +32,15 @@ namespace IntegrationProject.Controllers
 
         public ActionResult UserSignedInIndex()
         {
-            return View(db.User.ToList());
+            var loggedUser = User.Identity.GetUserName();
+
+            var users =
+                from u in db.Users
+                join v in db.User on u.UserID equals v.ID
+                where u.UserName == loggedUser && u.UserID == v.ID
+                select v;
+
+            return View(users);
         }
 
         // GET: Users/Details/5
@@ -34,18 +50,23 @@ namespace IntegrationProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.User.Find(id);
-            if (user == null)
+            //User user = db.User.Find(id);
+            var users = db.User.Single(m => m.ID == id);
+
+            if (users == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(users);
         }
 
         // GET: Users/Create
         public ActionResult Create()
         {
-            return View();
+            var loggedUser = User.Identity.GetUserName();
+            var users = db.User.Single(c => c.Email == loggedUser);
+
+            return View(users);
         }
 
         // POST: Users/Create
@@ -53,11 +74,18 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Email,Phone,Description,VolunteerUpVotes,VolunteerDownVotes,EventUpVotes,EventDownVotes,NoShowCount")] User user)
+        public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
             {
-                db.User.Add(user);
+                //db.User.Add(user);
+                var loggedUser = User.Identity.GetUserName();
+                var users = db.User.Single(c => c.Email == loggedUser);
+
+                users.Phone = user.Phone;
+                users.Description = user.Description;
+
+                db.Entry(users).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("UserSignedInIndex");
             }
