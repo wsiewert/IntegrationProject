@@ -18,8 +18,8 @@ namespace IntegrationProject.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        //[DataType(DataType.EmailAddress)]
-        //public string Email { get; set; }
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
 
         [RegularExpression(@"\d{10}$", ErrorMessage = "Invalid Phone Number")]
         public string Phone { get; set; }

@@ -389,7 +389,8 @@ namespace IntegrationProject.Controllers
                 User newUser = new User
                 {
                     FirstName = firstName,
-                    LastName = lastname
+                    LastName = lastname,
+                    Email = model.Email
                 };
 
                 var user = new ApplicationUser
@@ -406,7 +407,8 @@ namespace IntegrationProject.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        //return RedirectToLocal(returnUrl);
+                        return RedirectToAction("Create", "Users");
                     }
                 }
                 AddErrors(result);
