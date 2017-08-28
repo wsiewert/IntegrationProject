@@ -113,7 +113,7 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Email,Phone,Description,VolunteerUpVotes,VolunteerDownVotes,EventUpVotes,EventDownVotes,NoShowCount")] User user)
+        public ActionResult Edit(User user)
         {
             if (ModelState.IsValid)
             {
