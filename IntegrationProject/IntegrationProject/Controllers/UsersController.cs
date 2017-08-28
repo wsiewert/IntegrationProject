@@ -158,5 +158,39 @@ namespace IntegrationProject.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult IndexEventVolunteers()
+        {
+            var users =
+                (from u in db.User_Event
+                 join e in db.VolunteerEvent on u.VolunteerEventID equals e.ID
+                 join v in db.User on u.UserID equals v.ID
+                 where u.VolunteerEventID == e.ID && u.UserID == v.ID
+                 select v);
+
+            return View(users);
+        }
+
+        public ActionResult VolunteerDownVotesCounter(int id)
+        {
+            var users = db.User.Single(m => m.ID == id);
+            users.VolunteerDownVotes++;
+
+            db.Entry(users).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult VolunteerUpVotesCounter(int id)
+        {
+            var users = db.User.Single(m => m.ID == id);
+            users.VolunteerUpVotes++;
+
+            db.Entry(users).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
     }
 }

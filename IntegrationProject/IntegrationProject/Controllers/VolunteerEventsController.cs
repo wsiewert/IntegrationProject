@@ -21,6 +21,12 @@ namespace IntegrationProject.Controllers
             return View(db.VolunteerEvent.ToList());
         }
 
+        public ActionResult IndexVolunteerRoute(int id)
+        {
+            //return View();
+            return RedirectToAction("IndexEventVolunteers", "Users");
+        }
+
         // GET: VolunteerEvents/Details/5
         public ActionResult Details(int? id)
         {
