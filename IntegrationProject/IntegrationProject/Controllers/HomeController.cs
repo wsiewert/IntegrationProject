@@ -1,6 +1,10 @@
 ﻿using Postal;
 using System;
+using System.Data;
+using System.Data.Entity;
 using System.Collections.Generic;
+using IntegrationProject.Models;
+using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,6 +18,8 @@ namespace IntegrationProject.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
             return View();
@@ -41,16 +47,29 @@ namespace IntegrationProject.Controllers
 
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Contact(EmailFormModel model)
         {
             if (ModelState.IsValid)
-            {
+            { 
                 var body = "<p>Update from Event: {0} ({1})</p><p>Message:</p><p>{2}</p>";
-                //var recipients = model.volunteersSignedUp;
+
+
+
                 var message = new MailMessage();
-                //message.To.Add = string.Format(recipients);
+                //var recipeints = db.VolunteerEvent.Where(x => x.);
+
+                //foreach (var x in recipeints)
+                //{
+                   
+                //}
+
+
+
+
+                //message.To.Add(new MailAddress(recipients));
                 message.To.Add(new MailAddress("Bryanneumann1@gmail.com"));  // Sends to this address
                 message.From = new MailAddress("teamintegrationproject@gmail.com");  
                 message.Subject = "Important information about a volunteer event";

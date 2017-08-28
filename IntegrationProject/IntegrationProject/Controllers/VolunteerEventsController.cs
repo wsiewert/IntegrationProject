@@ -88,7 +88,8 @@ namespace IntegrationProject.Controllers
             {
                 db.Entry(volunteerEvent).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("SendMail", "Home");
             }
             return View(volunteerEvent);
         }
