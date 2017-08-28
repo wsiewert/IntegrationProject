@@ -23,6 +23,11 @@ namespace IntegrationProject.Controllers
             return View(user);
         }
 
+        public ActionResult Calendar()
+        {
+            return View();
+        }
+
         public ActionResult ReadOnlyIndex(int? id)
         {
             var user = db.User.Where(x => x.ID == id);
