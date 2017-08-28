@@ -49,6 +49,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Postal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=45719375b8b4d528, processorArchitecture=MSIL">
+      <HintPath>..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.4.1.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -210,12 +216,21 @@
     <Compile Include="Migrations\201708242029386_changed volunteerEvent.Designer.cs">
       <DependentUpon>201708242029386_changed volunteerEvent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708251352590_AddUserForeignKey.cs" />
+    <Compile Include="Migrations\201708251352590_AddUserForeignKey.Designer.cs">
+      <DependentUpon>201708251352590_AddUserForeignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708251616537_ReaddEmailColumnToUser.cs" />
+    <Compile Include="Migrations\201708251616537_ReaddEmailColumnToUser.Designer.cs">
+      <DependentUpon>201708251616537_ReaddEmailColumnToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201708252029328_new migration.cs" />
     <Compile Include="Migrations\201708252029328_new migration.Designer.cs">
       <DependentUpon>201708252029328_new migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EmailFormModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\User.cs" />
@@ -227,10 +242,13 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.datetimepicker.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\thumbsdown.png" />
+    <Content Include="Images\thumbsup.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -293,6 +311,17 @@
     <Content Include="Views\VolunteerEvents\Edit.cshtml" />
     <Content Include="Views\VolunteerEvents\Index.cshtml" />
     <Content Include="Views\Users\ReadOnlyIndex.cshtml" />
+    <Content Include="Views\Shared\_LayoutNoBar.cshtml" />
+
+    <Content Include="Views\Emails\_ViewStart.cshtml" />
+    <Content Include="Views\Emails\Web.config" />
+    <Content Include="Views\Emails\SendEmail.cshtml" />
+    <Content Include="Views\Home\SendMail.cshtml" />
+    <Content Include="Views\Home\Sent.cshtml" />
+
+   	<Content Include="Views\Shared\_LayoutVolunteer.cshtml" />
+    <Content Include="Views\Users\Calendar.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -321,6 +350,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708242029386_changed volunteerEvent.resx">
       <DependentUpon>201708242029386_changed volunteerEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708251352590_AddUserForeignKey.resx">
+      <DependentUpon>201708251352590_AddUserForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708251616537_ReaddEmailColumnToUser.resx">
+      <DependentUpon>201708251616537_ReaddEmailColumnToUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708252029328_new migration.resx">
       <DependentUpon>201708252029328_new migration.cs</DependentUpon>
