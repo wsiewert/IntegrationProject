@@ -44,16 +44,13 @@
     <div align="center">
         <div class=" description">
             <h4>
-                @*@Html.DisplayNameFor(model => model.EventName)<br>*@
-
                 @Html.DisplayNameFor(model => model.Description)
-                @foreach (var x in Model)
-                {
+            </h4>
+                @foreach (var x in Model) { 
                     <p>
                         @Html.DisplayFor(modelItem => x.Description)
                     </p>
                 }
-            </h4>
         </div>
     </div>
 
@@ -65,52 +62,35 @@
         }
     </style>
 
-    <div class="text-left">
-        <div class="table">
 
-            @Html.DisplayNameFor(model => model.State)
+    <table style="width:100%", id="vertical-1">           
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>Event</th>
+            <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+        </tr>
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.Address)</th><
+            <td><span class="address">@Html.DisplayFor(modelItem => item.Address)</span></td> 
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+            <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+            <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+        </tr>
 
-            @Html.DisplayNameFor(model => model.Zip)
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+        @Html.ActionLink("Details", "Details", new { id = item.ID })
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
 
-            @Html.DisplayNameFor(model => model.StartDate)
+    }
+        
+    </table>
 
-            @Html.DisplayNameFor(model => model.EndDate)
-
-            @Html.DisplayNameFor(model => model.Address)
-
-            @Html.DisplayNameFor(model => model.City)
-
-        </div>
-
-
-        @foreach (var item in Model)
-        {
-
-            @Html.DisplayFor(modelItem => item.EventName)
-
-            @Html.DisplayFor(modelItem => item.HostID)
-
-            @Html.DisplayFor(modelItem => item.Description)
-
-            <span class="address">@Html.DisplayFor(modelItem => item.Address)</span>
-
-            @Html.DisplayFor(modelItem => item.City)
-
-            @Html.DisplayFor(modelItem => item.State)
-
-            @Html.DisplayFor(modelItem => item.Zip)
-
-            @Html.DisplayFor(modelItem => item.StartDate)
-
-            @Html.DisplayFor(modelItem => item.EndDate)
-
-
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-            @Html.ActionLink("Details", "Details", new { id = item.ID })
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-
-        }
-    </div>
 
     <h4>Events in Google Map</h4>
 
@@ -122,7 +102,6 @@
                 zoom: 15,
             };
             var map = new google.maps.Map(document.getElementById("googleMap"), mapProp); 
-
             var addresses = document.getElementsByClassName('address');
             var geocoder = new google.maps.Geocoder();
             
@@ -132,27 +111,26 @@
                 // Geocode each address and place a marker on the map
                 geocoder.geocode({ 'address': address }, function (results, status) {
                     if (status == 'OK') {
-                        map.setCenter(results[0].geometry.location);
+                        //map.setCenter(results[0].geometry.location);
                         var marker = new google.maps.Marker({
                             map: map,
                             position: results[0].geometry.location
                         });
-                    } else {
+                    }
+                    else {
                         alert('Geocode was not successful for the following reason: ' + status);
                     }
-                });
-                
+                });   
             }
+            map.setCenter(mapProp.center);
         }
        
     </script>
 
-
+    @*map API*@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT9CH_tlLdtRwV0F6iqV3SNtV1biYxLOY&callback=myMap"></script>
-   <script src=" https://maps.googleapis.com/maps/api/geocode/json?&key=AIzaSyAZT8uW1sDbU7asaucSjFJZ0b_Nnjqw5W8"></script>
-
-    @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVjNbp0z7IvxQK0P9bdXb3BP7DzSMonLQ&callback=myMap"></script>*@
-
+    @*Geocode API*@
+    <script src=" https://maps.googleapis.com/maps/api/geocode/json?&key=AIzaSyAZT8uW1sDbU7asaucSjFJZ0b_Nnjqw5W8"></script>
     
 </body>
 </html>
