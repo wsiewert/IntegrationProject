@@ -16,5 +16,6 @@ namespace IntegrationProject.Models
 
         public VolunteerEvent VolunteerEvent { get; set; }
         public int VolunteerEventID { get; set; }
+
     }
 }
