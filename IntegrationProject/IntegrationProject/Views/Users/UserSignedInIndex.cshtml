@@ -1,173 +1,105 @@
 ﻿@model IEnumerable<IntegrationProject.Models.User>
-@*@model IntegrationProject.Models.User*@
 
 @{
     ViewBag.Title = "UserSignedInIndex";
     Layout = "~/Views/Shared/_LayoutVolunteer.cshtml";
 }
 
-<h2>Volunteer Profile</h2>
+<h2>My Profile</h2>
 
 <div>
     @*<h4>User</h4>*@
     <hr />
-@foreach (var item in Model)
-{
-    <dl class="dl-horizontal">
-        <dt>
-            Name
-            @*@Html.DisplayNameFor(model => model.FirstName)*@
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(modelItem => item.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(modelItem => item.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VolunteerUpVotes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(modelItem => item.VolunteerUpVotes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VolunteerDownVotes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(modelItem => item.VolunteerDownVotes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EventUpVotes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(modelItem => item.EventUpVotes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EventDownVotes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(modelItem => item.EventDownVotes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NoShowCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(modelItem => item.NoShowCount)
-        </dd>       
-    </dl>
-    <p>
-        @Html.ActionLink("Edit Profile", "Edit", new { id = item.ID })
-    </p>
-}
-</div>
-
-
-
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)           
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VolunteerUpVotes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VolunteerDownVotes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EventUpVotes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EventDownVotes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NoShowCount)
-        </th>
-        <th></th>
-    </tr>
-
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.ActionLink(item.FirstName, "ReadOnlyIndex", new { id = item.ID })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)                
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VolunteerUpVotes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VolunteerDownVotes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventUpVotes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventDownVotes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoShowCount)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) 
-            </td>
-        </tr>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <b>Name</b>
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <b>@Html.DisplayNameFor(model => model.Email)</b>
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <b>@Html.DisplayNameFor(model => model.Phone)</b>
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <b>@Html.DisplayNameFor(model => model.Description)</b>
+                </div>
+                <div class="col-md10">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <b>Volunteer Votes</b>
+                </div>
+                <div class="col-md-1">
+                    <img src="~/Images/thumbsup.png" alt="Thumbs Up" width="30" height="30" />
+                </div>
+                <div class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.VolunteerUpVotes)
+                </div>
+                <div class="col-md-1">
+                    <img src="~/Images/thumbsdown.png" alt="Thumbs Up" width="30" height="30" />
+                </div>
+                <div class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.VolunteerDownVotes)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <b>Event Host Votes</b>
+                </div>
+                <div class="col-md-1">
+                    <img src="~/Images/thumbsup.png" alt="Thumbs Up" width="30" height="30" />
+                </div>
+                <div class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.EventUpVotes)
+                </div>
+                <div class="col-md-1">
+                    <img src="~/Images/thumbsdown.png" alt="Thumbs Up" width="30" height="30" />
+                </div>
+                <div class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.EventDownVotes)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <b>@Html.DisplayNameFor(model => model.NoShowCount)</b>
+                </div>
+                <div class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.NoShowCount)
+                </div>
+            </div>
+        </div>
+        <p>
+            @Html.ActionLink("Edit Profile", "Edit", new { id = item.ID })
+        </p>
     }
-
-</table>*@
+</div>

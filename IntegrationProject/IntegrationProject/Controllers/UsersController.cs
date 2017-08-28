@@ -113,7 +113,7 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Email,Phone,Description,VolunteerUpVotes,VolunteerDownVotes,EventUpVotes,EventDownVotes,NoShowCount")] User user)
+        public ActionResult Edit(User user)
         {
             if (ModelState.IsValid)
             {
@@ -157,6 +157,40 @@ namespace IntegrationProject.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult IndexEventVolunteers()
+        {
+            var users =
+                (from u in db.User_Event
+                 join e in db.VolunteerEvent on u.VolunteerEventID equals e.ID
+                 join v in db.User on u.UserID equals v.ID
+                 where u.VolunteerEventID == e.ID && u.UserID == v.ID
+                 select v);
+
+            return View(users);
+        }
+
+        public ActionResult VolunteerDownVotesCounter(int id)
+        {
+            var users = db.User.Single(m => m.ID == id);
+            users.VolunteerDownVotes++;
+
+            db.Entry(users).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult VolunteerUpVotesCounter(int id)
+        {
+            var users = db.User.Single(m => m.ID == id);
+            users.VolunteerUpVotes++;
+
+            db.Entry(users).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }
