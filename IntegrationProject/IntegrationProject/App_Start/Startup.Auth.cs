@@ -62,6 +62,7 @@ namespace IntegrationProject
             {
                 ClientId = "596689477589-ciqajnr8bm2h39m53vsnvepp349bt0ac.apps.googleusercontent.com",
                 ClientSecret = "Wqv2_nJGVBy0Z31MwsfsqwYi"
+
             });
         }
     }

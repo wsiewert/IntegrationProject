@@ -36,7 +36,7 @@ namespace IntegrationProject.Controllers
         {
             dynamic email = new Email("SendEmail");
             email.to = "bryanneumann1@gmail.com";
-            email.Message = "Im sorry but this event has been canceled.";
+            email.Message = "There has been an update to an event that you have signed up for.";
             email.Send();
 
             return View();

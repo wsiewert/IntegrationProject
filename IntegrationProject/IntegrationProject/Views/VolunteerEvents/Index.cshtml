@@ -17,20 +17,23 @@
         }
     </style>
 </head>
+
 <body>
     <style>
         div.description {
             margin: 20px 0px 20px 0px;
             padding: 10px 0px 10px 0px;
-            border: 5px groove red;
+            /*border: 5px groove red;*/
         }
     </style>
     <div align="left">
         <h2>
-            @foreach (var x in Model)
+            @foreach (var x in Model)  
             {
                 @Html.DisplayFor(eventName => x.EventName)
             }
+            
+           
         </h2>
     </div>
 
@@ -41,73 +44,51 @@
     <div align="center">
         <div class=" description">
             <h4>
-                @*@Html.DisplayNameFor(model => model.EventName)<br>*@
-
                 @Html.DisplayNameFor(model => model.Description)
-                @foreach (var x in Model)
-                {
+            </h4>
+                @foreach (var x in Model) { 
                     <p>
                         @Html.DisplayFor(modelItem => x.Description)
                     </p>
                 }
-            </h4>
         </div>
     </div>
 
     <style>
         div.text-left {
-            border: 3px dashed red;
+            /*border: 3px dashed red;*/
             margin: 20px 0px 20px 0px;
             padding: 10px 0px 10px 10px;
         }
     </style>
 
-    <div class="text-left">
-        <div class="table">
+    <table style="width:100%", id="vertical-1">           
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>Event</th>
+            <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+        </tr>
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.Address)</th><
+            <td><span class="address">@Html.DisplayFor(modelItem => item.Address)</span></td> 
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+            <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+            <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+        </tr>
 
-            <tr>@Html.DisplayNameFor(model => model.State)</tr>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+        @Html.ActionLink("Details", "Details", new { id = item.ID })
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
 
-            <tr>@Html.DisplayNameFor(model => model.Zip)</tr>
-
-            @Html.DisplayNameFor(model => model.StartDate)<br>
-
-            @Html.DisplayNameFor(model => model.EndDate)<br>
-
-            @Html.DisplayNameFor(model => model.Address)
-
-            @Html.DisplayNameFor(model => model.City)<br>
-
-        </div>
-
-
-        @foreach (var item in Model)
-        {
-
-            @Html.DisplayFor(modelItem => item.EventName)
-
-            @Html.DisplayFor(modelItem => item.HostID)
-
-            @Html.DisplayFor(modelItem => item.Description)
-
-            @Html.DisplayFor(modelItem => item.Address)
-
-            @Html.DisplayFor(modelItem => item.City)
-
-            @Html.DisplayFor(modelItem => item.State)
-
-            @Html.DisplayFor(modelItem => item.Zip)
-
-            @Html.DisplayFor(modelItem => item.StartDate)
-
-            @Html.DisplayFor(modelItem => item.EndDate)
-
-
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-            @Html.ActionLink("Details", "Details", new { id = item.ID })
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-
-        }
-    </div>
+    }
+        
+    </table>
 
     <h4>Events in Google Map</h4>
 
@@ -115,18 +96,40 @@
     <script>
         function myMap() {
             var mapProp = {
-                center: new google.maps.LatLng(51.508742, -0.120850),
-                zoom: 5,
+                center: new google.maps.LatLng(43.0389000, -87.9064700),
+                zoom: 15,
             };
-            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-            //var marker = new google.maps.Marker({ position: 53218 });
-            //marker.setMap(map);
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp); 
+            var addresses = document.getElementsByClassName('address');
+            var geocoder = new google.maps.Geocoder();
+            
+            for (var i = 0; i < addresses.length; i++) {
+                var address = addresses[i].innerHTML;
+
+                // Geocode each address and place a marker on the map
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    if (status == 'OK') {
+                        //map.setCenter(results[0].geometry.location);
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location
+                        });
+                    }
+                    else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });   
+            }
+            map.setCenter(mapProp.center);
         }
+       
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=(YOURKEY)&callback=myMap"></script>
-
-    }
+    @*map API*@
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT9CH_tlLdtRwV0F6iqV3SNtV1biYxLOY&callback=myMap"></script>
+    @*Geocode API*@
+    <script src=" https://maps.googleapis.com/maps/api/geocode/json?&key=AIzaSyAZT8uW1sDbU7asaucSjFJZ0b_Nnjqw5W8"></script>
+    
 </body>
 </html>
 
