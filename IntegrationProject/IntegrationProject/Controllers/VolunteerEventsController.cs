@@ -53,7 +53,7 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,EventName,HostID,Description,Address,City,State,Zip,StartDate,EndDate,AllDay")] VolunteerEvent volunteerEvent)
+        public ActionResult Create(VolunteerEvent volunteerEvent)
         {
             volunteerEvent.HostID = User.Identity.GetUserId();
             //TODO: Add action to update user profile calendar
@@ -62,7 +62,7 @@ namespace IntegrationProject.Controllers
             {
                 db.VolunteerEvent.Add(volunteerEvent);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", volunteerEvent);
             }
 
             return View(volunteerEvent);

@@ -319,8 +319,12 @@
     <Content Include="Views\Home\Sent.cshtml" />
     <Content Include="Views\Shared\_LayoutVolunteer.cshtml" />
     <Content Include="Views\Users\Calendar.cshtml" />
+
     <Content Include="Views\VolunteerEvents\IndexVolunteerRoute.cshtml" />
     <Content Include="Views\Users\IndexEventVolunteers.cshtml" />
+
+    <Content Include="Views\Users\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

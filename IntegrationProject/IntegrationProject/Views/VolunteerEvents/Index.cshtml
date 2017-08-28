@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>All Events</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
 
@@ -19,59 +19,28 @@
 </head>
 
 <body>
-    <style>
+    @*<style>
         div.description {
             margin: 20px 0px 20px 0px;
             padding: 10px 0px 10px 0px;
-            /*border: 5px groove red;*/
         }
-    </style>
-    <div align="left">
-        <h2>
-            @foreach (var x in Model)  
-            {
-                @Html.DisplayFor(eventName => x.EventName)
-            }
-            
-           
-        </h2>
-    </div>
+    </style>*@
 
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
 
-    <div align="center">
-        <div class=" description">
-            <h4>
-                @Html.DisplayNameFor(model => model.Description)
-            </h4>
-                @foreach (var x in Model) { 
-                    <p>
-                        @Html.DisplayFor(modelItem => x.Description)
-                    </p>
-                }
-        </div>
-    </div>
-
-    <style>
-        div.text-left {
-            /*border: 3px dashed red;*/
-            margin: 20px 0px 20px 0px;
-            padding: 10px 0px 10px 10px;
-        }
-    </style>
-
-    <table style="width:100%", id="vertical-1">           
+   
+    <table style="width:100%", id="vertical-1">  
     @foreach (var item in Model)
     {
         <tr>
             <th>Event</th>
-            <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-        </tr>
-        <tr>
-            <th> @Html.DisplayNameFor(model => model.Address)</th><
-            <td><span class="address">@Html.DisplayFor(modelItem => item.Address)</span></td> 
+            <td>@Html.DisplayFor(modelItem => item.EventName)
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
         </tr>
         <tr>
             <th>@Html.DisplayNameFor(model => model.StartDate)</th>
@@ -82,14 +51,18 @@
             <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
         </tr>
 
+<<<<<<< HEAD
         @Html.ActionLink("Edit", "Edit", new { id = item.ID })
         @Html.ActionLink("Details", "Details", new { id = item.ID })
         @Html.ActionLink("Delete", "Delete", new { id = item.ID })
         
+=======
+>>>>>>> 5faf2e82a2759b543a4541bf5769cb436a815a05
     }
         
     </table>
 
+<<<<<<< HEAD
     <h4>Events in Google Map</h4>
 
     <div id="googleMap" style="width:100%;height:400px;"></div>
@@ -129,6 +102,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT9CH_tlLdtRwV0F6iqV3SNtV1biYxLOY&callback=myMap"></script>
     @*Geocode API*@
     <script src=" https://maps.googleapis.com/maps/api/geocode/json?&key=AIzaSyAZT8uW1sDbU7asaucSjFJZ0b_Nnjqw5W8"></script>
+=======
+>>>>>>> 5faf2e82a2759b543a4541bf5769cb436a815a05
     
 </body>
 </html>
