@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>VolunteerEvent</h4>
+    <h4>Volunteer Event</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -16,14 +16,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.EventName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HostID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HostID)
         </dd>
 
         <dt>
@@ -39,31 +31,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.State)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Zip)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Zip)
+          <span class="address"> @Html.DisplayFor(model => model.Address)</span>
         </dd>
 
         <dt>
@@ -81,18 +49,63 @@
         <dd>
             @Html.DisplayFor(model => model.EndDate)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AllDay)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AllDay)
-        </dd>
-
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+    
+
+<h4>Event in Google Map</h4>
+
+<div id="googleMap" style="width:100%;height:400px;"></div>
+<script>
+        function myMap() {
+            var mapProp = {
+                center: new google.maps.LatLng(43.0389000, -87.9064700),
+                zoom: 15,
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            var addresses = document.getElementsByClassName('address');
+            var geocoder = new google.maps.Geocoder();
+
+            for (var i = 0; i < addresses.length; i++) {
+                var address = addresses[i].innerHTML;
+
+                // Geocode each address and place a marker on the map
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    if (status == 'OK') {
+                        map.setCenter(results[0].geometry.location);
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location
+                        });
+                    }
+                    else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            }
+
+        }
+
+</script>
+
+@*map API*@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT9CH_tlLdtRwV0F6iqV3SNtV1biYxLOY&callback=myMap"></script>
+@*Geocode API*@
+<script src=" https://maps.googleapis.com/maps/api/geocode/json?&key=AIzaSyAZT8uW1sDbU7asaucSjFJZ0b_Nnjqw5W8"></script>
+
+
+
+@*<div align="left">
+    <h2>
+        @foreach (var x in Model)
+            {
+            @Html.DisplayFor(eventName => x.EventName)
+        }
+
+
+    </h2>
+</div>*@
