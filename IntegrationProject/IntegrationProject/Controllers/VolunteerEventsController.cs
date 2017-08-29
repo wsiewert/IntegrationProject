@@ -16,9 +16,18 @@ namespace IntegrationProject.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: VolunteerEvents
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.VolunteerEvent.ToList());
+            var events = from m in db.VolunteerEvent
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                events = events.Where(s => s.Address.Contains(searchString));
+            }
+
+            return View(events);
+            //return View(db.VolunteerEvent.ToList());
         }
 
         // GET: VolunteerEvents/Details/5
@@ -82,6 +91,7 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public ActionResult Edit (VolunteerEvent volunteerEvent)
         {
             if (ModelState.IsValid)

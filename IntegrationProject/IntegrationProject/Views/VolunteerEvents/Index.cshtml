@@ -4,42 +4,47 @@
     ViewBag.Title = "Event";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>All Events</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-
-    <style type="text/css">
-        .blueText {
-            color: #0000FF;
-        }
-    </style>
-</head>
 
 <body>
-    @*<style>
-        div.description {
-            margin: 20px 0px 20px 0px;
-            padding: 10px 0px 10px 0px;
-        }
-    </style>*@
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-
+    <h1>All Events</h1>
    
-    <table style="width:100%", id="vertical-1">  
-    @foreach (var item in Model)
-    {
-        <tr>
-            <th>Event</th>
-            <td>@Html.DisplayFor(modelItem => item.EventName)
+    <p>
+        
+        @Html.ActionLink("Create New", "Create")
+
+        @using (@Html.BeginForm()) {
+            <p> Search for volunteer events in your city: @Html.TextBox("SearchString")<br/>
+            <intput type="submit" value ="Search"/></p>
+        }
+    </p>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+                <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                @Html.ActionLink(item.EventName, "Details", new { id = item.ID })
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                @Html.ActionLink("Details", "Details", new { id = item.ID })
                 @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+<<<<<<< HEAD
+                </td>
+               
+                <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+              
+                <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+=======
             </td>
         </tr>
         <tr>
@@ -58,6 +63,6 @@
         
     </table>
 
+>>>>>>> 434ad6b36bff60766b38f761274ff3f8ab25fd27
 </body>
-</html>
 
