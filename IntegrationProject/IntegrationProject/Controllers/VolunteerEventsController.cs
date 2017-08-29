@@ -24,7 +24,19 @@ namespace IntegrationProject.Controllers
         public ActionResult IndexVolunteerRoute(int id)
         {
             //return View();
-            return RedirectToAction("IndexEventVolunteers", "Users");
+            return RedirectToAction("IndexEventVolunteers", "Users", new { id = id });
+        }
+
+        public ActionResult IndexVolunteerRouteViewOnly(int id)
+        {
+            //return View();
+            return RedirectToAction("IndexEventVolunteersViewOnly", "Users", new { id = id });
+        }
+
+        public ActionResult IndexHostRoute(int id)
+        {
+            //return View();
+            return RedirectToAction("IndexEventHost", "Users", new { id = id });
         }
 
         // GET: VolunteerEvents/Details/5
@@ -34,7 +46,30 @@ namespace IntegrationProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             VolunteerEvent volunteerEvent = db.VolunteerEvent.Find(id);
+            var host = (from a in db.Users
+                        join e in db.VolunteerEvent on a.Id equals e.HostID
+                        join v in db.User on a.UserID equals v.ID
+                        where e.ID == id && e.HostID == a.Id && a.UserID == v.ID
+                        select new
+                        {
+                            FirstName = v.FirstName,
+                            LastName = v.LastName,
+                            HostID = e.HostID,
+                            EndDate = e.EndDate
+                        });
+
+            foreach (var x in host)
+            {
+                ViewBag.First = x.FirstName;
+                ViewBag.Last = x.LastName;
+                ViewBag.Host = x.HostID;
+                ViewBag.EndDate = x.EndDate;
+            }
+
+            ViewBag.LoggedUser = User.Identity.GetUserId();
+
             if (volunteerEvent == null)
             {
                 return HttpNotFound();
@@ -88,7 +123,7 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,EventName,HostID,Description,Address,City,State,Zip,StartDate,EndDate,AllDay")] VolunteerEvent volunteerEvent)
+        public ActionResult Edit(VolunteerEvent volunteerEvent)
         {
             if (ModelState.IsValid)
             {

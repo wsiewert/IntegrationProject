@@ -71,7 +71,14 @@
                 <div class="col-md-1">
                     @Html.DisplayFor(modelItem => item.VolunteerDownVotes)
                 </div>
+                <div class="col-md-1">
+                    <img src="~/Images/noshow.jpg" alt="No Show" width="30" height="30" />
+                </div>
+                <div class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.NoShowCount)
+                </div>
             </div>
+
             <div class="row">
                 <div class="col-md-2">
                     <b>Event Host Votes</b>
@@ -87,14 +94,6 @@
                 </div>
                 <div class="col-md-1">
                     @Html.DisplayFor(modelItem => item.EventDownVotes)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <b>@Html.DisplayNameFor(model => model.NoShowCount)</b>
-                </div>
-                <div class="col-md-2">
-                    @Html.DisplayFor(modelItem => item.NoShowCount)
                 </div>
             </div>
         </div>
