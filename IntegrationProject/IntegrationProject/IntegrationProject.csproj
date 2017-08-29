@@ -224,9 +224,17 @@
     <Compile Include="Migrations\201708251616537_ReaddEmailColumnToUser.Designer.cs">
       <DependentUpon>201708251616537_ReaddEmailColumnToUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708252029328_new migration.cs" />
-    <Compile Include="Migrations\201708252029328_new migration.Designer.cs">
-      <DependentUpon>201708252029328_new migration.cs</DependentUpon>
+    <Compile Include="Migrations\201708282002429_AddRatedColumnUserEvent.cs" />
+    <Compile Include="Migrations\201708282002429_AddRatedColumnUserEvent.Designer.cs">
+      <DependentUpon>201708282002429_AddRatedColumnUserEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708291344564_RemoveRatedFromUserEvent.cs" />
+    <Compile Include="Migrations\201708291344564_RemoveRatedFromUserEvent.Designer.cs">
+      <DependentUpon>201708291344564_RemoveRatedFromUserEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708291422140_ReaddRatedToUserEvent.cs" />
+    <Compile Include="Migrations\201708291422140_ReaddRatedToUserEvent.Designer.cs">
+      <DependentUpon>201708291422140_ReaddRatedToUserEvent.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -319,12 +327,11 @@
     <Content Include="Views\Home\Sent.cshtml" />
     <Content Include="Views\Shared\_LayoutVolunteer.cshtml" />
     <Content Include="Views\Users\Calendar.cshtml" />
-
     <Content Include="Views\VolunteerEvents\IndexVolunteerRoute.cshtml" />
     <Content Include="Views\Users\IndexEventVolunteers.cshtml" />
-
     <Content Include="Views\Users\Index.cshtml" />
-
+    <Content Include="Views\Users\IndexEventVolunteersViewOnly.cshtml" />
+    <Content Include="Views\Users\IndexEventHost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -360,8 +367,14 @@
     <EmbeddedResource Include="Migrations\201708251616537_ReaddEmailColumnToUser.resx">
       <DependentUpon>201708251616537_ReaddEmailColumnToUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708252029328_new migration.resx">
-      <DependentUpon>201708252029328_new migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708282002429_AddRatedColumnUserEvent.resx">
+      <DependentUpon>201708282002429_AddRatedColumnUserEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708291344564_RemoveRatedFromUserEvent.resx">
+      <DependentUpon>201708291344564_RemoveRatedFromUserEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708291422140_ReaddRatedToUserEvent.resx">
+      <DependentUpon>201708291422140_ReaddRatedToUserEvent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

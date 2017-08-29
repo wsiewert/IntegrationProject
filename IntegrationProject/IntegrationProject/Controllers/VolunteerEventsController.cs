@@ -21,6 +21,8 @@ namespace IntegrationProject.Controllers
             var events = from m in db.VolunteerEvent
                          select m;
 
+
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 events = events.Where(s => s.Address.Contains(searchString));
@@ -28,6 +30,7 @@ namespace IntegrationProject.Controllers
 
             return View(events);
             //return View(db.VolunteerEvent.ToList());
+
         }
 
         // GET: VolunteerEvents/Details/5
@@ -37,7 +40,30 @@ namespace IntegrationProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             VolunteerEvent volunteerEvent = db.VolunteerEvent.Find(id);
+            var host = (from a in db.Users
+                        join e in db.VolunteerEvent on a.Id equals e.HostID
+                        join v in db.User on a.UserID equals v.ID
+                        where e.ID == id && e.HostID == a.Id && a.UserID == v.ID
+                        select new
+                        {
+                            FirstName = v.FirstName,
+                            LastName = v.LastName,
+                            HostID = e.HostID,
+                            EndDate = e.EndDate
+                        });
+
+            foreach (var x in host)
+            {
+                ViewBag.First = x.FirstName;
+                ViewBag.Last = x.LastName;
+                ViewBag.Host = x.HostID;
+                ViewBag.EndDate = x.EndDate;
+            }
+
+            ViewBag.LoggedUser = User.Identity.GetUserId();
+
             if (volunteerEvent == null)
             {
                 return HttpNotFound();
@@ -92,13 +118,14 @@ namespace IntegrationProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Edit (VolunteerEvent volunteerEvent)
+        public ActionResult Edit(VolunteerEvent volunteerEvent)
+
         {
             if (ModelState.IsValid)
             {
                 db.Entry(volunteerEvent).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("SendMail", "Home",volunteerEvent);
+                return RedirectToAction("SendMail", "Home", volunteerEvent);
             }
             return View(volunteerEvent);
         }
@@ -136,6 +163,24 @@ namespace IntegrationProject.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult IndexVolunteerRoute(int id)
+        {
+            //return View();
+            return RedirectToAction("IndexEventVolunteers", "Users", new { id = id });
+        }
+
+        public ActionResult IndexVolunteerRouteViewOnly(int id)
+        {
+            //return View();
+            return RedirectToAction("IndexEventVolunteersViewOnly", "Users", new { id = id });
+        }
+
+        public ActionResult IndexHostRoute(int id)
+        {
+            //return View();
+            return RedirectToAction("IndexEventHost", "Users", new { id = id });
         }
     }
 }

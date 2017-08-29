@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<IntegrationProject.Models.User>
 
 @{
-    ViewBag.Title = "IndexEventVolunteers";
+    ViewBag.Title = "IndexEventVolunteersViewOnly";
 }
 <h2>Event Volunteers</h2>
 
@@ -47,21 +47,15 @@
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                <a href="@Url.Action("VolunteerUpVotesCounter", new { id = item.ID, eventId = ViewBag.VolunteerEventId })">
-                    <img src="@Url.Content("~/Images/thumbsup.png")" alt="Thumbs Up" width="30" height="30" />
-                </a>
+                <img src="@Url.Content("~/Images/thumbsup.png")" alt="Thumbs Up" width="30" height="30" />
                 @Html.DisplayFor(modelItem => item.VolunteerUpVotes)
             </td>
             <td>
-                <a href="@Url.Action("VolunteerDownVotesCounter", new { id = item.ID, eventId = ViewBag.VolunteerEventId })">
-                    <img src="@Url.Content("~/Images/thumbsdown.png")" alt="Thumbs Down" width="30" height="30" />
-                </a> 
+                <img src="@Url.Content("~/Images/thumbsdown.png")" alt="Thumbs Down" width="30" height="30" />
                 @Html.DisplayFor(modelItem => item.VolunteerDownVotes)
             </td>
             <td>
-                <a href="@Url.Action("NoShowVotesCounter", new { id = item.ID, eventId = ViewBag.VolunteerEventId  })">
-                    <img src="@Url.Content("~/Images/noshow.jpg")" alt="No Show" width="30" height="30" />
-                </a>
+                <img src="@Url.Content("~/Images/noshow.jpg")" alt="No Show" width="30" height="30" />
                 @Html.DisplayFor(modelItem => item.NoShowCount)
             </td>
             @*
