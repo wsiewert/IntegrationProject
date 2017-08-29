@@ -19,8 +19,35 @@
 
             $('#calendar').fullCalendar({
                 // put your options and callbacks here
-
             })
+
+            //var eventsArray = [];
+
+            //for (var i = 1; i < 32; i++) {
+            //    var sampleEvent = {
+            //        "id": "2302",
+            //        "title": "New Event",
+            //        "start": "8/" + i.toString() + "/2017 12:00:00 AM",
+            //        "end": "8/" + i.toString() + "/2017 12:00:00 PM",
+            //        "allDay": true,
+            //        "url": "https://www.google.com"
+            //    }
+            //    eventsArray.push(sampleEvent);
+            //}
+
+            var titleString = (@ViewBag.Json).toString();
+            //var titleString = "hello";
+
+            var sampleEvent = [{
+                    "id": "2302",
+                    "title": titleString,
+                    "start": "8/5/2017 12:00:00 AM",
+                    "end": "8/5/2017 12:00:00 PM",
+                    "allDay": true,
+                    "url": "https://www.google.com"
+                }]
+            
+            $('#calendar').fullCalendar('addEventSource', (@ViewBag.Json));
         });
     </script>
 

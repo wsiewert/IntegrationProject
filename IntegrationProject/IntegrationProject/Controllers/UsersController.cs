@@ -25,7 +25,31 @@ namespace IntegrationProject.Controllers
 
         public ActionResult Calendar()
         {
+            //Query list of events and use JSONresult in viewbag or view data.
+            //Make an array[] of objects
+
+            ViewBag.Json = GetEvents();
+            //ViewBag.Json = 7; 
+
             return View();
+        }
+
+        public JsonResult GetEvents()
+        {
+            //get current user login id
+            //query events table. add to viewbag volunteer events
+            //query events table. add to viewbag host events (keep these separate)
+
+            var eventList = new List<object>();
+            
+            eventList.Add( new {
+                id = "5",
+                title = "JSON Event",
+                start = "8/1/2017 12:00:00 AM",
+                end = "8/1/2017 12:00:00 PM"
+            });
+
+            return Json(eventList);
         }
 
         public ActionResult ReadOnlyIndex(int? id)
