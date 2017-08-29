@@ -7,13 +7,13 @@ namespace IntegrationProject.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class newmigration : IMigrationMetadata
+    public sealed partial class ReaddRatedToUserEvent : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(newmigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ReaddRatedToUserEvent));
         
         string IMigrationMetadata.Id
         {
-            get { return "201708252029328_new migration"; }
+            get { return "201708291422140_ReaddRatedToUserEvent"; }
         }
         
         string IMigrationMetadata.Source

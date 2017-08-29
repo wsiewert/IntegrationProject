@@ -142,7 +142,7 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Email,Phone,Description,VolunteerUpVotes,VolunteerDownVotes,EventUpVotes,EventDownVotes,NoShowCount")] User user)
+        public ActionResult Edit(User user)
         {
             if (ModelState.IsValid)
             {
@@ -187,5 +187,144 @@ namespace IntegrationProject.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult IndexEventVolunteers(int id)
+        {
+            ViewBag.VolunteerEventId = id;
+
+            var users =
+                (from u in db.User_Event
+                 join e in db.VolunteerEvent on u.VolunteerEventID equals e.ID
+                 join v in db.User on u.UserID equals v.ID
+                 where e.ID == id && u.VolunteerEventID == e.ID && u.UserID == v.ID
+                 select v);
+
+            return View(users);
+        }
+
+        public ActionResult IndexEventVolunteersViewOnly(int id)
+        {
+            var users =
+                (from u in db.User_Event
+                 join e in db.VolunteerEvent on u.VolunteerEventID equals e.ID
+                 join v in db.User on u.UserID equals v.ID
+                 where e.ID == id && u.VolunteerEventID == e.ID && u.UserID == v.ID
+                 select v);
+
+            return View(users);
+        }
+
+        public ActionResult IndexEventHost(int id)
+        {
+            ViewBag.HostEventId = id;
+
+            var host = (from a in db.Users
+                        join e in db.VolunteerEvent on a.Id equals e.HostID
+                        join v in db.User on a.UserID equals v.ID
+                        where e.ID == id && e.HostID == a.Id && a.UserID == v.ID
+                        select v);
+
+            return View(host);
+        }
+
+        public ActionResult VolunteerDownVotesCounter(int id, int eventId)
+        {           
+            var rated = db.User_Event.Single(u => u.UserID == id && u.VolunteerEventID == eventId);
+
+            if (rated.Rated == false)
+            {
+                rated.Rated = true;
+
+                var users = db.User.Single(m => m.ID == id);
+                users.VolunteerUpVotes++;
+
+                db.Entry(rated).State = EntityState.Modified;
+                db.Entry(users).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult VolunteerUpVotesCounter(int id, int eventId)
+        {
+            var rated = db.User_Event.Single(u => u.UserID == id && u.VolunteerEventID == eventId);
+
+            if (rated.Rated == false)
+            {
+                rated.Rated = true;
+
+                var users = db.User.Single(m => m.ID == id);
+                users.VolunteerUpVotes++;
+
+                db.Entry(rated).State = EntityState.Modified;
+                db.Entry(users).State = EntityState.Modified;
+                db.SaveChanges();                
+            }
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult EventUpVotesCounter(int id, int eventId)
+        {
+            var rated = db.User_Event.Single(u => u.UserID == id && u.VolunteerEventID == eventId);
+
+            if (rated.Rated == false)
+            {
+                rated.Rated = true;
+
+                var users = db.User.Single(m => m.ID == id);
+                users.VolunteerUpVotes++;
+
+                db.Entry(rated).State = EntityState.Modified;
+                db.Entry(users).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult EventDownVotesCounter(int id, int eventId)
+        {
+            var rated = db.User_Event.Single(u => u.UserID == id && u.VolunteerEventID == eventId);
+
+            if (rated.Rated == false)
+            {
+                rated.Rated = true;
+
+                var users = db.User.Single(m => m.ID == id);
+                users.VolunteerUpVotes++;
+
+                db.Entry(rated).State = EntityState.Modified;
+                db.Entry(users).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult NoShowVotesCounter(int id, int eventId)
+        {
+            var rated = db.User_Event.Single(u => u.UserID == id && u.VolunteerEventID == eventId);
+
+            if (rated.Rated == false)
+            {
+                rated.Rated = true;
+
+                var users = db.User.Single(m => m.ID == id);
+                users.VolunteerUpVotes++;
+
+                db.Entry(rated).State = EntityState.Modified;
+                db.Entry(users).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else if (rated.Rated == true)
+            {
+                ViewBag.Message = "Rated";
+            }
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
     }
 }

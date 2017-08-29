@@ -1,17 +1,75 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@model MVCEmail.Models.EmailFormModel
+@{
+    ViewBag.Title = "Contact Us";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h4>If you need to contact us, please fill out the form below and we will get back to you as soon as possible.</h4>
+    
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.FromName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FromName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FromName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FromEmail, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FromEmail, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FromEmail)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Message, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Message)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Send" />
+        </div>
+    </div>
+    <hr />
+    <div>
+            <p style="padding:6em"></p>
+        <h4>Visit us at our Milwaukee location!</h4>
+    </div>
+}
+<p>We are located at 333 North Plankinton Ave</p>
+      <p> Milwaukee, WI 53203 </p>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div id="googleMap" style="width:100%;height:400px;"></div>
+<script>
+        function myMap() {
+            var mapProp = {
+                center: new google.maps.LatLng(43.034032, -87.9113468),
+                zoom: 17,
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            var addresses = document.getElementsByClassName('address');
+            var geocoder = new google.maps.Geocoder();
+                        map.setCenter(results[0].geometry.location);
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: LatLng(43.034032, -87.9113468),
+                        });
+  
+        }
+
+</script>
+
+@*map API*@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT9CH_tlLdtRwV0F6iqV3SNtV1biYxLOY&callback=myMap"></script>
+@*Geocode API*@
+<script src=" https://maps.googleapis.com/maps/api/geocode/json?&key=AIzaSyAZT8uW1sDbU7asaucSjFJZ0b_Nnjqw5W8"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

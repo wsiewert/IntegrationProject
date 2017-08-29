@@ -1,0 +1,83 @@
+﻿@model IEnumerable<IntegrationProject.Models.User>
+
+@{
+    ViewBag.Title = "IndexEventVolunteers";
+}
+<h2>Event Volunteers</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VolunteerUpVotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VolunteerDownVotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoShowCount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.FirstName, "ReadOnlyIndex", new { id = item.ID }, new { target = "_blank" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                <a href="@Url.Action("VolunteerUpVotesCounter", new { id = item.ID, eventId = ViewBag.VolunteerEventId })">
+                    <img src="@Url.Content("~/Images/thumbsup.png")" alt="Thumbs Up" width="30" height="30" />
+                </a>
+                @Html.DisplayFor(modelItem => item.VolunteerUpVotes)
+            </td>
+            <td>
+                <a href="@Url.Action("VolunteerDownVotesCounter", new { id = item.ID, eventId = ViewBag.VolunteerEventId })">
+                    <img src="@Url.Content("~/Images/thumbsdown.png")" alt="Thumbs Down" width="30" height="30" />
+                </a> 
+                @Html.DisplayFor(modelItem => item.VolunteerDownVotes)
+            </td>
+            <td>
+                <a href="@Url.Action("NoShowVotesCounter", new { id = item.ID, eventId = ViewBag.VolunteerEventId  })">
+                    <img src="@Url.Content("~/Images/noshow.jpg")" alt="No Show" width="30" height="30" />
+                </a>
+                @Html.DisplayFor(modelItem => item.NoShowCount)
+            </td>
+            @*
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                </td>*@            
+        </tr>
+    }
+
+    <tr>
+        <td>
+            @Html.ActionLink("Back", "Index", "VolunteerEvents")
+        </td>
+    </tr>
+
+</table>
+
+
