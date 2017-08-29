@@ -42,7 +42,7 @@ namespace IntegrationProject.Controllers
                 from u in db.User_Event
                 join e in db.VolunteerEvent on u.VolunteerEventID equals e.ID
                 join v in db.User on u.UserID equals v.ID
-                where u.UserID == users.ID || e.HostID == loggedUserID || e.ID == 6
+                where u.UserID == users.ID || e.HostID == loggedUserID
                 select e;
 
             ViewBag.LoggedUserID = loggedUserID;
