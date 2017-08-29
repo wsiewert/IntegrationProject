@@ -9,6 +9,9 @@
 
 <div>
     <h4>Volunteer Event</h4>
+    <h2>
+        @Html.ActionLink("Sign Up", "AddUserToEvent", null, new { id = Model.ID }, new { onclick = "return confirm('Are you sure you want to sign up for this event?')" })
+    </h2>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -61,10 +64,11 @@
         </dd>
     </dl>
 </div>
-<p>
 
-    <button type="button" onclick="alert('Your generosity is greatly appreciated, Thank you for signing up!')">Sign up for Event!</button>
-    @Html.ActionLink("Back to List", "Index")
+<p>
+    @*<button type="button" onclick="AddUserToEvent(), new {id = Model.ID}">Click to Sign up for this Event!</button>*@
+    @*<p id="demo" onclick="AddUserToEvent(), new {id = Model.ID}">Click to Sign up for this Event.</p>*@
+    @Html.ActionLink("Back to List", "Index") |
 
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index") |

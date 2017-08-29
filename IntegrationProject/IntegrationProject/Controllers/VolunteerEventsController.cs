@@ -15,6 +15,22 @@ namespace IntegrationProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult AddUserToEvent(int id)
+        {
+            var loggedUser = User.Identity.GetUserName();
+            var users = db.User.Single(v => v.Email == loggedUser);
+
+            User_Event user_event = new User_Event
+            {
+                UserID = users.ID,
+                VolunteerEventID = id
+            };
+
+           db.User_Event.Add(user_event);
+            db.SaveChanges();
+            return RedirectToAction("index");
+        }
+
         // GET: VolunteerEvents
         public ActionResult Index(string searchString)
         {
