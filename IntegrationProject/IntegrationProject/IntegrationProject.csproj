@@ -312,16 +312,19 @@
     <Content Include="Views\VolunteerEvents\Index.cshtml" />
     <Content Include="Views\Users\ReadOnlyIndex.cshtml" />
     <Content Include="Views\Shared\_LayoutNoBar.cshtml" />
-
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Emails\Web.config" />
     <Content Include="Views\Emails\SendEmail.cshtml" />
     <Content Include="Views\Home\SendMail.cshtml" />
     <Content Include="Views\Home\Sent.cshtml" />
-
-   	<Content Include="Views\Shared\_LayoutVolunteer.cshtml" />
+    <Content Include="Views\Shared\_LayoutVolunteer.cshtml" />
     <Content Include="Views\Users\Calendar.cshtml" />
+
+    <Content Include="Views\VolunteerEvents\IndexVolunteerRoute.cshtml" />
+    <Content Include="Views\Users\IndexEventVolunteers.cshtml" />
+
     <Content Include="Views\Users\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -33,6 +33,7 @@
                 @Html.ActionLink(item.EventName, "Details", new { id = item.ID })
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID })
                 @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+<<<<<<< HEAD
                 </td>
                
                 <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
@@ -43,5 +44,25 @@
             }
         </tbody>
     </table>
+=======
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+            <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+            <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+        </tr>
+
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+        @Html.ActionLink("Details", "Details", new { id = item.ID })
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+    }
+        
+    </table>
+
+>>>>>>> 434ad6b36bff60766b38f761274ff3f8ab25fd27
 </body>
 

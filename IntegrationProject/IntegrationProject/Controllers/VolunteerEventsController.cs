@@ -56,7 +56,7 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(VolunteerEvent volunteerEvent)
+        public ActionResult Create([Bind(Include = "ID,EventName,HostID,Description,Address,City,State,Zip,StartDate,EndDate,AllDay")] VolunteerEvent volunteerEvent)
         {
             volunteerEvent.HostID = User.Identity.GetUserId();
             //TODO: Add action to update user profile calendar
@@ -65,7 +65,7 @@ namespace IntegrationProject.Controllers
             {
                 db.VolunteerEvent.Add(volunteerEvent);
                 db.SaveChanges();
-                return RedirectToAction("Details", volunteerEvent);
+                return RedirectToAction("Index");
             }
 
             return View(volunteerEvent);
@@ -91,13 +91,14 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( VolunteerEvent volunteerEvent)
+
+        public ActionResult Edit (VolunteerEvent volunteerEvent)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(volunteerEvent).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("SendMail", "Home",volunteerEvent);
             }
             return View(volunteerEvent);
         }
