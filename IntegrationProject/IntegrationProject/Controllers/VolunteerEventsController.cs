@@ -16,11 +16,12 @@ namespace IntegrationProject.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: VolunteerEvents
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.VolunteerEvent.ToList());
-        }
+            var events = from m in db.VolunteerEvent
+                         select m;
 
+<<<<<<< HEAD
         public ActionResult IndexVolunteerRoute(int id)
         {
             //return View();
@@ -37,6 +38,15 @@ namespace IntegrationProject.Controllers
         {
             //return View();
             return RedirectToAction("IndexEventHost", "Users", new { id = id });
+=======
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                events = events.Where(s => s.Address.Contains(searchString));
+            }
+
+            return View(events);
+            //return View(db.VolunteerEvent.ToList());
+>>>>>>> f18dec3c1949753cf9deaed8ee0e186b86f95ea3
         }
 
         // GET: VolunteerEvents/Details/5
@@ -88,7 +98,7 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(VolunteerEvent volunteerEvent)
+        public ActionResult Create([Bind(Include = "ID,EventName,HostID,Description,Address,City,State,Zip,StartDate,EndDate,AllDay")] VolunteerEvent volunteerEvent)
         {
             volunteerEvent.HostID = User.Identity.GetUserId();
             //TODO: Add action to update user profile calendar
@@ -97,7 +107,7 @@ namespace IntegrationProject.Controllers
             {
                 db.VolunteerEvent.Add(volunteerEvent);
                 db.SaveChanges();
-                return RedirectToAction("Details", volunteerEvent);
+                return RedirectToAction("Index");
             }
 
             return View(volunteerEvent);
@@ -123,13 +133,18 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+<<<<<<< HEAD
         public ActionResult Edit(VolunteerEvent volunteerEvent)
+=======
+
+        public ActionResult Edit (VolunteerEvent volunteerEvent)
+>>>>>>> f18dec3c1949753cf9deaed8ee0e186b86f95ea3
         {
             if (ModelState.IsValid)
             {
                 db.Entry(volunteerEvent).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("SendMail", "Home",volunteerEvent);
             }
             return View(volunteerEvent);
         }

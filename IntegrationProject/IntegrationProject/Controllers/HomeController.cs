@@ -1,6 +1,10 @@
 ﻿using Postal;
 using System;
+using System.Data;
+using System.Data.Entity;
 using System.Collections.Generic;
+using IntegrationProject.Models;
+using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,6 +18,8 @@ namespace IntegrationProject.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
             return View();
@@ -32,28 +38,37 @@ namespace IntegrationProject.Controllers
 
             return View();
         }
-        public ActionResult SendMail()
+        public ActionResult SendMail(int? id)
         {
-            dynamic email = new Email("SendEmail");
-            email.to = "bryanneumann1@gmail.com";
-            email.Message = "There has been an update to an event that you have signed up for.";
-            email.Send();
-
-            return View();
+            ViewBag.Id = id;
+                
+            var recipients =
+               (from u in db.User_Event
+                join e in db.VolunteerEvent on u.VolunteerEventID equals e.ID
+                join v in db.User on u.UserID equals v.ID
+                where e.ID == id && u.VolunteerEventID == e.ID && u.UserID == v.ID
+                select v);
+            foreach (var v in recipients)
+            {
+                dynamic email = new Email("SendEmail");
+                email.to = v.Email.ToString();
+                email.Message = "There has been an update to a volunteer event.";
+                email.Send();
+            }
+            return View(id);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Contact(EmailFormModel model)
         {
             if (ModelState.IsValid)
-            {
-                var body = "<p>Update from Event: {0} ({1})</p><p>Message:</p><p>{2}</p>";
-                //var recipients = model.volunteersSignedUp;
+            { 
+                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
                 var message = new MailMessage();
-                //message.To.Add = string.Format(recipients);
                 message.To.Add(new MailAddress("Bryanneumann1@gmail.com"));  // Sends to this address
                 message.From = new MailAddress("teamintegrationproject@gmail.com");  
-                message.Subject = "Important information about a volunteer event";
+                message.Subject = "Customer Feedback";
                 message.Body = string.Format(body, model.FromName, model.FromEmail, model.Message);
                 message.IsBodyHtml = true;
 
