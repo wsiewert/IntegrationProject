@@ -38,14 +38,24 @@ namespace IntegrationProject.Controllers
 
             return View();
         }
-        public ActionResult SendMail()
+        public ActionResult SendMail(int? id)
         {
-            dynamic email = new Email("SendEmail");
-            email.to = "bryanneumann1@gmail.com";
-            email.Message = "There has been an update to an event that you have signed up for.";
-            email.Send();
-
-            return View();
+            ViewBag.Id = id;
+                
+            var recipients =
+               (from u in db.User_Event
+                join e in db.VolunteerEvent on u.VolunteerEventID equals e.ID
+                join v in db.User on u.UserID equals v.ID
+                where e.ID == id && u.VolunteerEventID == e.ID && u.UserID == v.ID
+                select v);
+            foreach (var v in recipients)
+            {
+                dynamic email = new Email("SendEmail");
+                email.to = v.Email.ToString();
+                email.Message = "There has been an update to a volunteer event.";
+                email.Send();
+            }
+            return View(id);
         }
 
         [HttpPost]
@@ -54,25 +64,11 @@ namespace IntegrationProject.Controllers
         {
             if (ModelState.IsValid)
             { 
-                var body = "<p>Update from Event: {0} ({1})</p><p>Message:</p><p>{2}</p>";
-
-
-
+                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
                 var message = new MailMessage();
-                //var recipeints = db.VolunteerEvent.Where(x => x.);
-
-                //foreach (var x in recipeints)
-                //{
-                   
-                //}
-
-
-
-
-                //message.To.Add(new MailAddress(recipients));
                 message.To.Add(new MailAddress("Bryanneumann1@gmail.com"));  // Sends to this address
                 message.From = new MailAddress("teamintegrationproject@gmail.com");  
-                message.Subject = "Important information about a volunteer event";
+                message.Subject = "Customer Feedback";
                 message.Body = string.Format(body, model.FromName, model.FromEmail, model.Message);
                 message.IsBodyHtml = true;
 

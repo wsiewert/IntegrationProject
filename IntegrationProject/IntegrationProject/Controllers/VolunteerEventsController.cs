@@ -82,13 +82,13 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,EventName,HostID,Description,Address,City,State,Zip,StartDate,EndDate,AllDay")] VolunteerEvent volunteerEvent)
+        public ActionResult Edit (VolunteerEvent volunteerEvent)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(volunteerEvent).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("SendMail", "Home");
+                return RedirectToAction("SendMail", "Home",volunteerEvent);
             }
             return View(volunteerEvent);
         }
