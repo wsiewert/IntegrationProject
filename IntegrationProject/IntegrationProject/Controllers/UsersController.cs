@@ -23,6 +23,35 @@ namespace IntegrationProject.Controllers
             return View(user);
         }
 
+        public ActionResult Calendar()
+        {
+            //Query list of events and use JSONresult in viewbag or view data.
+            //Make an array[] of objects
+
+            ViewBag.Json = GetEvents();
+            //ViewBag.Json = 7; 
+
+            return View();
+        }
+
+        public JsonResult GetEvents()
+        {
+            //get current user login id
+            //query events table. add to viewbag volunteer events
+            //query events table. add to viewbag host events (keep these separate)
+
+            var eventList = new List<object>();
+            
+            eventList.Add( new {
+                id = "5",
+                title = "JSON Event",
+                start = "8/1/2017 12:00:00 AM",
+                end = "8/1/2017 12:00:00 PM"
+            });
+
+            return Json(eventList);
+        }
+
         public ActionResult ReadOnlyIndex(int? id)
         {
             var user = db.User.Where(x => x.ID == id);
@@ -207,7 +236,7 @@ namespace IntegrationProject.Controllers
                 rated.Rated = true;
 
                 var users = db.User.Single(m => m.ID == id);
-                users.VolunteerUpVotes++;
+                users.VolunteerDownVotes++;
 
                 db.Entry(rated).State = EntityState.Modified;
                 db.Entry(users).State = EntityState.Modified;
@@ -245,7 +274,7 @@ namespace IntegrationProject.Controllers
                 rated.Rated = true;
 
                 var users = db.User.Single(m => m.ID == id);
-                users.VolunteerUpVotes++;
+                users.EventUpVotes++;
 
                 db.Entry(rated).State = EntityState.Modified;
                 db.Entry(users).State = EntityState.Modified;
@@ -264,7 +293,7 @@ namespace IntegrationProject.Controllers
                 rated.Rated = true;
 
                 var users = db.User.Single(m => m.ID == id);
-                users.VolunteerUpVotes++;
+                users.EventDownVotes++;
 
                 db.Entry(rated).State = EntityState.Modified;
                 db.Entry(users).State = EntityState.Modified;
@@ -283,17 +312,12 @@ namespace IntegrationProject.Controllers
                 rated.Rated = true;
 
                 var users = db.User.Single(m => m.ID == id);
-                users.VolunteerUpVotes++;
+                users.NoShowCount++;
 
                 db.Entry(rated).State = EntityState.Modified;
                 db.Entry(users).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            else if (rated.Rated == true)
-            {
-                ViewBag.Message = "Rated";
-            }
-
             return Redirect(Request.UrlReferrer.ToString());
         }
 

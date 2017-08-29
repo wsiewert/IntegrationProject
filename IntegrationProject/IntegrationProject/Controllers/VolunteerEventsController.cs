@@ -15,29 +15,13 @@ namespace IntegrationProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult AddUserToEvent(int id)
-        {
-            var loggedUser = User.Identity.GetUserName();
-            var users = db.User.Single(v => v.Email == loggedUser);
-
-            User_Event user_event = new User_Event
-            {
-                UserID = users.ID,
-                VolunteerEventID = id
-            };
-
-           db.User_Event.Add(user_event);
-            db.SaveChanges();
-            return RedirectToAction("index");
-        }
-
         // GET: VolunteerEvents
         public ActionResult Index(string searchString)
         {
+            ViewBag.LoggedUser = User.Identity.GetUserId();
+
             var events = from m in db.VolunteerEvent
                          select m;
-
-
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -46,7 +30,23 @@ namespace IntegrationProject.Controllers
 
             return View(events);
             //return View(db.VolunteerEvent.ToList());
+        }
 
+        public ActionResult IndexMyEvents()
+        {
+            var loggedUserID = User.Identity.GetUserId();
+            var loggedUser = User.Identity.GetUserName();
+            var users = db.User.Single(v => v.Email == loggedUser);
+
+            var events =
+                from u in db.User_Event
+                join e in db.VolunteerEvent on u.VolunteerEventID equals e.ID
+                join v in db.User on u.UserID equals v.ID
+                where u.UserID == users.ID || e.HostID == loggedUserID
+                select e;
+
+            ViewBag.LoggedUserID = loggedUserID;
+            return View(events);
         }
 
         // GET: VolunteerEvents/Details/5
@@ -98,9 +98,10 @@ namespace IntegrationProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,EventName,HostID,Description,Address,City,State,Zip,StartDate,EndDate,AllDay")] VolunteerEvent volunteerEvent)
+        public ActionResult Create(VolunteerEvent volunteerEvent)
         {
             volunteerEvent.HostID = User.Identity.GetUserId();
+
             //TODO: Add action to update user profile calendar
 
             if (ModelState.IsValid)
@@ -135,7 +136,6 @@ namespace IntegrationProject.Controllers
         [ValidateAntiForgeryToken]
 
         public ActionResult Edit(VolunteerEvent volunteerEvent)
-
         {
             if (ModelState.IsValid)
             {
@@ -197,6 +197,37 @@ namespace IntegrationProject.Controllers
         {
             //return View();
             return RedirectToAction("IndexEventHost", "Users", new { id = id });
+        }
+
+        public ActionResult AddUserToEvent(int id)
+        {
+            var loggedUser = User.Identity.GetUserName();
+            var users = db.User.Single(v => v.Email == loggedUser);
+
+            User_Event user_event = new User_Event
+            {
+                UserID = users.ID,
+                VolunteerEventID = id
+            };
+
+            db.User_Event.Add(user_event);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult CancelVolunteerEvent(int id)
+        {
+            var loggedUser = User.Identity.GetUserName();
+            var users = db.User.Single(v => v.Email == loggedUser);
+
+            var userEvent = db.User_Event.Single(e => e.VolunteerEventID == id && e.UserID == users.ID);
+           
+            User_Event user_event = db.User_Event.Find(userEvent.ID);
+            db.User_Event.Remove(userEvent);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
