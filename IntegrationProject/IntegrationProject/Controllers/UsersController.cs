@@ -207,7 +207,7 @@ namespace IntegrationProject.Controllers
                 rated.Rated = true;
 
                 var users = db.User.Single(m => m.ID == id);
-                users.VolunteerUpVotes++;
+                users.VolunteerDownVotes++;
 
                 db.Entry(rated).State = EntityState.Modified;
                 db.Entry(users).State = EntityState.Modified;
@@ -245,7 +245,7 @@ namespace IntegrationProject.Controllers
                 rated.Rated = true;
 
                 var users = db.User.Single(m => m.ID == id);
-                users.VolunteerUpVotes++;
+                users.EventUpVotes++;
 
                 db.Entry(rated).State = EntityState.Modified;
                 db.Entry(users).State = EntityState.Modified;
@@ -264,7 +264,7 @@ namespace IntegrationProject.Controllers
                 rated.Rated = true;
 
                 var users = db.User.Single(m => m.ID == id);
-                users.VolunteerUpVotes++;
+                users.EventDownVotes++;
 
                 db.Entry(rated).State = EntityState.Modified;
                 db.Entry(users).State = EntityState.Modified;
@@ -283,17 +283,12 @@ namespace IntegrationProject.Controllers
                 rated.Rated = true;
 
                 var users = db.User.Single(m => m.ID == id);
-                users.VolunteerUpVotes++;
+                users.NoShowCount++;
 
                 db.Entry(rated).State = EntityState.Modified;
                 db.Entry(users).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            else if (rated.Rated == true)
-            {
-                ViewBag.Message = "Rated";
-            }
-
             return Redirect(Request.UrlReferrer.ToString());
         }
 

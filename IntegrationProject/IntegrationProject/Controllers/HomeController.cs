@@ -22,6 +22,8 @@ namespace IntegrationProject.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.LoggedUser = User.Identity.GetUserId();
+
             return View();
         }
 
