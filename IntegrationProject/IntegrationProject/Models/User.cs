@@ -26,14 +26,19 @@ namespace IntegrationProject.Models
 
         public string Description { get; set; }
 
+        [Display (Name = "Up Vote")]
         public int VolunteerUpVotes { get; set; }
 
+        [Display(Name = "Down Vote")]
         public int VolunteerDownVotes { get; set; }
 
+        [Display(Name = "Up Vote")]
         public int EventUpVotes { get; set; }
 
+        [Display(Name = "Down Vote")]
         public int EventDownVotes { get; set; }
-        
+
+        [Display(Name = "No Show")]
         public int NoShowCount { get; set; }
 
         
