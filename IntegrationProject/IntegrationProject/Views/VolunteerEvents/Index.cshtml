@@ -33,16 +33,14 @@
             <tr>
                 <td>
                 @Html.ActionLink(item.EventName, "Details", new { id = item.ID })
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
                 </td>
                
                 <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
               
                 <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
             </tr>
-            }            
-        </tbody>        
+            }
+        </tbody>
     </table>
     @Html.ActionLink("Back to List", "Index")
 </body>
