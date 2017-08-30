@@ -192,11 +192,14 @@ namespace IntegrationProject.Controllers
         {
             ViewBag.VolunteerEventId = id;
 
+            var loggedUser = User.Identity.GetUserName();
+            var usersId = db.User.Single(v => v.Email == loggedUser);
+
             var users =
                 (from u in db.User_Event
                  join e in db.VolunteerEvent on u.VolunteerEventID equals e.ID
                  join v in db.User on u.UserID equals v.ID
-                 where e.ID == id && u.VolunteerEventID == e.ID && u.UserID == v.ID
+                 where u.VolunteerEventID == id && u.UserID != usersId.ID
                  select v);
 
             return View(users);
@@ -204,11 +207,14 @@ namespace IntegrationProject.Controllers
 
         public ActionResult IndexEventVolunteersViewOnly(int id)
         {
+            var loggedUser = User.Identity.GetUserName();
+            var usersId = db.User.Single(v => v.Email == loggedUser);
+
             var users =
                 (from u in db.User_Event
                  join e in db.VolunteerEvent on u.VolunteerEventID equals e.ID
                  join v in db.User on u.UserID equals v.ID
-                 where e.ID == id && u.VolunteerEventID == e.ID && u.UserID == v.ID
+                 where u.VolunteerEventID == id && u.UserID != usersId.ID
                  select v);
 
             return View(users);

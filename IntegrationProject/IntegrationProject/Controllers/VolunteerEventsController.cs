@@ -29,7 +29,6 @@ namespace IntegrationProject.Controllers
             }
 
             return View(events);
-            //return View(db.VolunteerEvent.ToList());
         }
 
         public ActionResult IndexMyEvents()
@@ -42,7 +41,7 @@ namespace IntegrationProject.Controllers
                 from u in db.User_Event
                 join e in db.VolunteerEvent on u.VolunteerEventID equals e.ID
                 join v in db.User on u.UserID equals v.ID
-                where u.UserID == users.ID || e.HostID == loggedUserID
+                where u.UserID == users.ID
                 select e;
 
             ViewBag.LoggedUserID = loggedUserID;
@@ -80,6 +79,21 @@ namespace IntegrationProject.Controllers
 
             ViewBag.LoggedUser = User.Identity.GetUserId();
 
+            var loggedUser = User.Identity.GetUserName();
+            var users = db.User.Single(v => v.Email == loggedUser);
+
+            var userEvents =
+                from u in db.User_Event
+                join e in db.VolunteerEvent on u.VolunteerEventID equals e.ID
+                join v in db.User on u.UserID equals v.ID
+                where u.UserID == users.ID && u.VolunteerEventID == id
+                select v;
+
+            if(!userEvents.Any())
+            {
+                ViewBag.Volunteer = "false";
+            }
+
             if (volunteerEvent == null)
             {
                 return HttpNotFound();
@@ -100,12 +114,20 @@ namespace IntegrationProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(VolunteerEvent volunteerEvent)
         {
+            var loggedUser = User.Identity.GetUserName();
+            var users = db.User.Single(v => v.Email == loggedUser);
+
             volunteerEvent.HostID = User.Identity.GetUserId();
 
-            //TODO: Add action to update user profile calendar
+            User_Event user_event = new User_Event
+            {
+                UserID = users.ID,
+                VolunteerEventID = volunteerEvent.ID
+            };
 
             if (ModelState.IsValid)
             {
+                db.User_Event.Add(user_event);
                 db.VolunteerEvent.Add(volunteerEvent);
                 db.SaveChanges();
                 return RedirectToAction("Index");

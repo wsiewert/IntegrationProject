@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutVolunteer.cshtml";
     var today = DateTime.Now;
 }
 
@@ -9,9 +10,12 @@
 
 <div>
     <h4>Volunteer Event</h4>
+    @if (Model.EndDate > today && ViewBag.Volunteer == "false")
+    {
     <h2>
         @Html.ActionLink("Sign Up", "AddUserToEvent", null, new { id = Model.ID }, new { onclick = "return confirm('Are you sure you want to sign up for this event?')" })
     </h2>
+    }
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -66,8 +70,11 @@
 </div>
 
 <p>
+    @if (ViewBag.Host != ViewBag.LoggedUser && ViewBag.Volunteer != "false")
+    {
+        @Html.ActionLink("Cancel Signup | ", "CancelVolunteerEvent", null, new { id = Model.ID }, new { onclick = "return confirm('Are you sure you want to cancel this volunteering opportunity?')" })
+    }
 
-    @Html.ActionLink("Cancel Signup", "CancelVolunteerEvent", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index") |
 
     @if (ViewBag.LoggedUser != null)
@@ -84,7 +91,7 @@
         {
             @Html.ActionLink("Display Volunteers", "IndexVolunteerRouteViewOnly", new { id = Model.ID })
         }
-        else if (ViewBag.Host != ViewBag.LoggedUser && Model.EndDate > today)
+        else if (ViewBag.Host != ViewBag.LoggedUser && ViewBag.Volunteer != "false" && Model.EndDate < today)
         {
             @Html.ActionLink("Rate Event", "IndexHostRoute", new { id = Model.ID })
         }
