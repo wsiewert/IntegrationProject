@@ -28,8 +28,9 @@ namespace IntegrationProject.Controllers
             //Query list of events and use JSONresult in viewbag or view data.
             //Make an array[] of objects
 
-            ViewBag.Json = GetEvents();
-            //ViewBag.Json = 7; 
+            //ViewBag.Json = GetEvents();
+            //ViewBag.Json = 7;
+            ViewBag.Json = "[{ title: JSON EV, start: \"8/1/2017 12:00:00 AM\", end: \"8/1/2017 12:00:00 PM\" }]";
 
             return View();
         }
@@ -41,15 +42,15 @@ namespace IntegrationProject.Controllers
             //query events table. add to viewbag host events (keep these separate)
 
             var eventList = new List<object>();
-            
-            eventList.Add( new {
-                id = "5",
+
+            eventList.Add( new 
+            {
                 title = "JSON Event",
                 start = "8/1/2017 12:00:00 AM",
                 end = "8/1/2017 12:00:00 PM"
             });
 
-            return Json(eventList);
+            return Json(eventList, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ReadOnlyIndex(int? id)
@@ -186,7 +187,7 @@ namespace IntegrationProject.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+         }
 
         public ActionResult IndexEventVolunteers(int id)
         {

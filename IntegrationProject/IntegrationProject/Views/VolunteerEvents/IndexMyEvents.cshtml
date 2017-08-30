@@ -27,8 +27,6 @@
             <tr>
                 <td>
                 @Html.ActionLink(item.EventName, "Details", new { id = item.ID })
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
                 </td>
                 <td>
                     @if (item.HostID == ViewBag.LoggedUserID)

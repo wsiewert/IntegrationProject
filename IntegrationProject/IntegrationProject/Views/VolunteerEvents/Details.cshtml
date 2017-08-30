@@ -76,20 +76,16 @@
     }
 
     @Html.ActionLink("Back to List", "Index") |
-
+    @Html.ActionLink("Display Volunteers", "IndexVolunteerRoute", new { id = Model.ID }) |
     @if (ViewBag.LoggedUser != null)
     {
-        if (ViewBag.Host == ViewBag.LoggedUser)
-        {
-            @Html.ActionLink("Edit | ", "Edit", new { id = Model.ID })
-        }
         if (ViewBag.Host == ViewBag.LoggedUser && Model.EndDate < today)
         {
-            @Html.ActionLink("Display Volunteers", "IndexVolunteerRoute", new { id = Model.ID })
+            @Html.ActionLink("Display Volunteers", "IndexVolunteerRouteViewOnly", new { id = Model.ID })
         }
         else if (ViewBag.Host == ViewBag.LoggedUser && Model.EndDate > today)
         {
-            @Html.ActionLink("Display Volunteers", "IndexVolunteerRouteViewOnly", new { id = Model.ID })
+            @Html.ActionLink("Display Volunteers", "IndexVolunteerRoute", new { id = Model.ID })
         }
         else if (ViewBag.Host != ViewBag.LoggedUser && ViewBag.Volunteer != "false" && Model.EndDate < today)
         {
