@@ -8,12 +8,11 @@
 <body>
     <h1>All Events</h1>
 <<<<<<< HEAD
+
+=======
+>>>>>>> 6194f3d21e717b0c2b264650de8ed1f8294b2204
     @if (ViewBag.LoggedUser != null)
     { <p>
-=======
-   
-    <p>
->>>>>>> 144d635f641523cef57985e2a5527d579b48bb6b
         @Html.ActionLink("Create New", "Create")
       </p>
     }
@@ -38,8 +37,6 @@
             <tr>
                 <td>
                 @Html.ActionLink(item.EventName, "Details", new { id = item.ID })
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
                 </td>
                
                 <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
@@ -47,13 +44,13 @@
                 <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
             </tr>
 <<<<<<< HEAD
-            }            
-        </tbody>        
-=======
 
             }
         </tbody>
->>>>>>> 144d635f641523cef57985e2a5527d579b48bb6b
+=======
+            }            
+        </tbody>        
+>>>>>>> 6194f3d21e717b0c2b264650de8ed1f8294b2204
     </table>
     @Html.ActionLink("Back to List", "Index")
 </body>
